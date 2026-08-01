@@ -1,0 +1,66 @@
+{
+  "serverInfo": {
+    "name": "mcp-brasil-gateway",
+    "version": "1.0.0"
+  },
+  "authentication": {
+    "required": false
+  },
+  "tools": [
+    {
+      "name": "consulta_cnpj_enriquecida",
+      "description": "Consulta dados cadastrais completos de empresas no Brasil por CNPJ (Razão Social, Sócios, Capital, Endereço, CNAE).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "cnpj": { "type": "string", "description": "CNPJ de 14 dígitos a ser consultado (apenas números)." }
+        },
+        "required": ["cnpj"]
+      }
+    },
+    {
+      "name": "consulta_pncp_licitacoes",
+      "description": "Busca oportunidades de licitações e compras públicas ativas no Brasil (PNCP) por palavra-chave e UF.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "termo": { "type": "string", "description": "Termo de busca para a licitação (ex: notebook, software)." },
+          "uf": { "type": "string", "description": "UF (Estado) para filtrar as licitações (ex: SP, RJ, DF)." },
+          "pagina": { "type": "number", "description": "Número da página do resultado (início em 1)." }
+        },
+        "required": ["termo"]
+      }
+    },
+    {
+      "name": "consulta_fipe_veiculos_imoveis",
+      "description": "Consulta cotação oficial da Tabela FIPE no Brasil por código FIPE.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "codigo_fipe": { "type": "string", "description": "Código FIPE oficial do veículo (ex: 005437-2)." }
+        },
+        "required": ["codigo_fipe"]
+      }
+    },
+    {
+      "name": "cadastrar_alerta_licitacao",
+      "description": "Cadastra um alerta de licitação. O servidor buscará novos editais 24/7 e notificará o e-mail cadastrado (Premium).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "termo": { "type": "string", "description": "Termo/palavra-chave a monitorar." },
+          "email": { "type": "string", "description": "E-mail para receber as notificações." }
+        },
+        "required": ["termo", "email"]
+      }
+    },
+    {
+      "name": "listar_alertas_licitacao",
+      "description": "Lista todos os alertas de licitação cadastrados e ativos vinculados a esta chave de API.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  ]
+}

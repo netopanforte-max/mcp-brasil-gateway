@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🇧🇷 MCP Brasil Gateway - Conecte sua IA a Dados Reais</title>
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: #151d30;
+      --border: #222f4c;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --primary-hover: #0ea5e9;
+      --accent: #f472b6;
+      --success: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+    }
+    header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media(min-width: 768px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+      .full-width { grid-column: 1 / -1; }
+    }
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover {
+      border-color: #38bdf850;
+    }
+    .card h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card h2 span {
+      background: #38bdf820;
+      color: var(--primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+      font-size: 0.8rem;
+    }
+    p.desc {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background-color: var(--bg-main);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    button {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background-color: var(--primary);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    button:hover {
+      background-color: var(--primary-hover);
+    }
+    .result-box {
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: var(--bg-main);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      word-break: break-all;
+      font-family: monospace;
+      font-size: 0.9rem;
+      display: none;
+    }
+    pre {
+      background-color: var(--bg-main);
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      color: var(--primary);
+      overflow-x: auto;
+      font-family: monospace;
+      font-size: 0.85rem;
+    }
+    .tool-list {
+      list-style: none;
+      margin-top: 1rem;
+    }
+    .tool-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+    .tool-list code {
+      color: var(--accent);
+      background: #f472b615;
+      padding: 0.1rem 0.3rem;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🇧🇷 MCP Brasil Gateway</h1>
+      <p>Conecte seus Agentes de IA (Claude Code, Cursor, Windsurf) a Dados Públicos e Comerciais do Brasil</p>
+    </header>
+
+    <div class="grid">
+      <!-- CARD 1: TRIAL KEY GENERATOR -->
+      <div class="card">
+        <h2>1. Teste Grátis <span>Trial</span></h2>
+        <p class="desc">Gere uma chave de testes imediatamente para experimentar o servidor MCP com 20 créditos inclusos.</p>
+        <div class="form-group">
+          <label for="trialName">Seu Nome ou Empresa</label>
+          <input type="text" id="trialName" placeholder="Ex: Dev João">
+        </div>
+        <button onclick="generateTrialKey()">Gerar Chave de Teste</button>
+        <div id="trialResult" class="result-box"></div>
+      </div>
+
+      <!-- CARD 2: PIX CHECKOUT -->
+      <div class="card">
+        <h2>2. Recarga de Créditos <span>Pix Automático</span></h2>
+        <p class="desc">Adicione créditos à sua chave. R$ 1,00 = 100 requisições de ferramentas MCP.</p>
+        <div class="form-group">
+          <label for="payKey">Sua Chave de API</label>
+          <input type="text" id="payKey" placeholder="mcp_live_...">
+        </div>
+        <div class="form-group">
+          <label for="payAmount">Valor da Recarga</label>
+          <select id="payAmount">
+            <option value="5">R$ 5,00 (500 créditos)</option>
+            <option value="10" selected>R$ 10,00 (1000 créditos)</option>
+            <option value="20">R$ 20,00 (2000 créditos)</option>
+            <option value="50">R$ 50,00 (5000 créditos)</option>
+          </select>
+        </div>
+        <button onclick="generatePix()">Gerar Código Pix</button>
+        <div id="pixResult" class="result-box"></div>
+      </div>
+
+      <!-- CARD 3: CONFIGURATION SNIPPET -->
+      <div class="card full-width">
+        <h2>3. Como Configurar no Claude / Cursor</h2>
+        <p class="desc">Copie o trecho abaixo para o arquivo de configurações do seu agente para começar a usar.</p>
+        <label>Configuração do Claude Desktop (<code>claude_desktop_config.json</code>):</label>
+        <pre id="configSnippet">{
+  "mcpServers": {
+    "mcp-brasil-gateway": {
+      "url": "http://localhost:3000/sse?api_key=SUA_CHAVE_AQUI"
+    }
+  }
+}</pre>
+        <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">Para uso via conexão de rede pública, utilize a URL SSE gerada após expor com o túnel.</p>
+      </div>
+
+      <!-- CARD 4: AVAILABLE TOOLS -->
+      <div class="card full-width">
+        <h2>Ferramentas de Consulta Ativas</h2>
+        <p class="desc">Seu agente de IA terá acesso direto a estes comandos estruturados:</p>
+        <ul class="tool-list">
+          <li><code>consulta_cnpj_enriquecida</code> - Dados completos de CNPJ, Quadro de Sócios e Capital Social.</li>
+          <li><code>consulta_pncp_licitacoes</code> - Busca de oportunidades de compras federais e estaduais ativas no Brasil.</li>
+          <li><code>consulta_fipe_veiculos_imoveis</code> - Cotação de veículos na Tabela FIPE oficial.</li>
+          <li><code>cadastrar_alerta_licitacao</code> - Monitoramento inteligente 24/7 de termos de compras públicas.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function generateTrialKey() {
+      const clientName = document.getElementById('trialName').value;
+      const resultBox = document.getElementById('trialResult');
+      if (!clientName) {
+        alert('Por favor, informe seu nome.');
+        return;
+      }
+      try {
+        const res = await fetch('/billing/trial-key', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ clientName })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          resultBox.style.display = 'block';
+          resultBox.style.borderColor = 'var(--success)';
+          resultBox.innerHTML = '<span style="color: var(--success)">✅ Chave Gerada:</span><br><strong>' + data.apiKey + '</strong><br><br>Ganhos: 20 créditos grátis!';
+          
+          // Atualizar snippet
+          const host = window.location.origin;
+          document.getElementById('configSnippet').innerText = JSON.stringify({
+            mcpServers: {
+              "mcp-brasil-gateway": {
+                "url": host + "/sse?api_key=" + data.apiKey
+              }
+            }
+          }, null, 2);
+        } else {
+          alert(data.error);
+        }
+      } catch(err) {
+        alert('Erro de conexão ao gerar chave.');
+      }
+    }
+
+    async function generatePix() {
+      const key = document.getElementById('payKey').value;
+      const amount = parseFloat(document.getElementById('payAmount').value);
+      const resultBox = document.getElementById('pixResult');
+      
+      if (!key) {
+        alert('Por favor, informe sua Chave de API.');
+        return;
+      }
+
+      try {
+        const res = await fetch('/billing/pix?api_key=' + key, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ amount })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          resultBox.style.display = 'block';
+          resultBox.innerHTML = '<strong>Pix Copia e Cola Gerado:</strong><br>' +
+            '<textarea readonly style="width:100%; height:80px; margin: 0.5rem 0; background:#0f172a; border:1px solid var(--border); color:#38bdf8; font-family:monospace; font-size:0.8rem; padding:0.5rem; border-radius:4px;">' + data.pix_copia_e_cola + '</textarea>' +
+            '<p style="font-size:0.8rem; color:var(--text-muted)">TxID: ' + data.txid + '</p>' +
+            '<p style="font-size:0.8rem; color:var(--success); font-weight:bold; margin-top:0.5rem;">Os créditos serão liberados automaticamente após o pagamento.</p>';
+        } else {
+          alert(data.error);
+        }
+      } catch(err) {
+        alert('Erro de conexão ao gerar Pix.');
+      }
+    }
+  </script>
+</body>
+</html>
